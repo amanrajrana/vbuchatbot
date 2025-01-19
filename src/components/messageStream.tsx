@@ -1,8 +1,8 @@
 import { Message } from "ai";
-import { BotMessageSquare, Info, Loader, User } from "lucide-react";
-import React, { ReactNode } from "react";
-import Markdown from "react-markdown";
+import { Info } from "lucide-react";
+import React from "react";
 import "./markdown-styles.css";
+import { ReceiverMessageList, SenderMessageList } from "./messageList";
 
 type Props = {
   messages: Message[];
@@ -12,65 +12,18 @@ type Props = {
 
 export default function MessageStream({ messages, isLoading, error }: Props) {
   return (
-    <section className="w-full">
-      {messages.map((message, index) => (
-        <MessageList
-          key={index}
-          role={message.role}
-          content={message.content}
-        />
-      ))}
+    <section className="w-full flex flex-col gap-y-4 pb-2">
+      {messages.map((message, index) => {
+        if (message.role === "user") {
+          return <SenderMessageList key={index} content={message.content} />;
+        } else {
+          return <ReceiverMessageList key={index} content={message.content} />;
+        }
+      })}
 
-      {isLoading && (
-        <MessageList
-          status={<Loader className="animate-spin" size={14} />}
-          role="assistant"
-          content=""
-        />
-      )}
-      {error && (
-        <MessageList
-          role="assistant"
-          status={<ErrorMessage message="Something went wrong!" />}
-          content={error.message}
-        />
-      )}
+      {isLoading && <ReceiverMessageList isThinking content="" />}
+      {error && <ErrorMessage message={"Ohh... Something went wrong"} />}
     </section>
-  );
-}
-
-type MessageListProps = {
-  role: Message["role"];
-  content: Message["content"];
-  status?: ReactNode;
-};
-
-/**
- * MessageList component displays chat messages in the interface.
- *
- * @param {string} role - The role of the message sender (either 'user' or 'assistant').
- * @param {string} content - The content of the message.
- * @param {ReactNode} status - The status of the message (e.g., 'loading', 'error').
- * @returns {JSX.Element} The React component rendering the message.
- */
-function MessageList({ role, content, status }: MessageListProps): JSX.Element {
-  return (
-    <div className={`flex gap-4 w-full ${role === "assistant" && "mb-8"}`}>
-      <div
-        className={`${
-          role === "user" ? "bg-black text-white" : "bg-gray-300 text-black"
-        } rounded-md aspect-square w-8 h-8 border flex justify-center items-center mt-4`}
-      >
-        {role === "user" ? <User size={16} /> : <BotMessageSquare size={22} />}
-      </div>
-      <div className="border-b pt-4 flex-1 overflow-auto">
-        {status ? (
-          <div>{status}</div>
-        ) : (
-          <Markdown className={"markdown-body"}>{content}</Markdown>
-        )}
-      </div>
-    </div>
   );
 }
 
