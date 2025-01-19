@@ -1,0 +1,47 @@
+.chatBox::after {
+  --clip-border-radius: 4px;
+  --width: 18px;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: var(--width);
+  height: 23px;
+  background-color: inherit;
+}
+
+.sender::after {
+  right: calc((-1 * var(--width) / 2));
+  /* clip-path: polygon(100% 0, 0 0, 0 100%); */
+  clip-path: polygon(0 0, 0 100%, 100% 100%);
+  border-bottom-right-radius: var(--clip-border-radius);
+}
+
+.receiver::after {
+  left: calc((-1 * var(--width) / 2));
+  clip-path: polygon(100% 0, 0 100%, 100% 100%);
+  border-bottom-left-radius: var(--clip-border-radius);
+}
+
+/* Bouncing Ball Animation */
+.bouncingBall > div:nth-child(1) {
+  animation: anm-bl-2-bounce 1s ease-in-out infinite;
+}
+
+.bouncingBall > div:nth-child(2) {
+  animation: anm-bl-2-bounce 1s ease-in-out 0.22s infinite;
+}
+
+.bouncingBall > div:nth-child(3) {
+  animation: anm-bl-2-bounce 1s ease-in-out 0.44s infinite;
+}
+
+@keyframes anm-bl-2-bounce {
+  0%,
+  75%,
+  100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-8px); /* Reduced bounce height */
+  }
+}

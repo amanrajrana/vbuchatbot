@@ -18,12 +18,12 @@ export default function ChatInterface() {
 
   return (
     <>
-      <div className="container h-full max-w-[768px] pt-24 flex">
+      <div className="container h-full max-w-[768px] pt-24">
         {/* 
         If there are no messages, we will display the DefaultPrompt component.
          */}
         {messages.length === 0 ? (
-          <DefaultPrompt setInput={setInput} handleSubmit={handleSubmit} />
+          <DefaultPrompt />
         ) : (
           <MessageStream
             error={error}

@@ -1,4 +1,5 @@
 import { chatRequestSchema } from "@/app/schemas/chatRequest.schema";
+import { AI_INSTRUCTION } from "@/constant/botVariable";
 import { google } from "@ai-sdk/google";
 import { Message, streamText } from "ai";
 import { NextRequest, NextResponse } from "next/server";
@@ -25,8 +26,7 @@ export async function POST(req: NextRequest) {
 
   data.unshift({
     role: "system",
-    content:
-      "You are an AI-powered chatbot assistant for the Department of Computer Application, Vinoba Bhave University, Hazaribagh. Your primary responsibility is to provide accurate, helpful, and up-to-date information about the department, its academic programs, admission processes, faculty members, courses, fees, and general university-related queries.",
+    content: AI_INSTRUCTION,
   });
 
   try {
