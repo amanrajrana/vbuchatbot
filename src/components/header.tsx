@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import { BotMessageSquare, LogIn } from "lucide-react";
 import { ModeToggle } from "./theme-toggle";
+import { AI_NAME } from "@/constant/botVariable";
 
 export default function Header() {
   return (
@@ -13,7 +14,7 @@ export default function Header() {
         </Link>
         <div className="flex items-center ">
           <span className="ml-2 text-sm font-medium hover:underline dark:text-zinc-200">
-            Riddler
+            {AI_NAME}
           </span>
         </div>
       </div>
