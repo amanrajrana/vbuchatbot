@@ -3,13 +3,14 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
+import { AI_NAME } from "@/constant/botVariable";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Riddler Ai: Where Every Puzzle Finds a Solution!",
+  title: `${AI_NAME} - AI assistant for the Department of Computer Application`,
   description:
-    "Riddler AI is your friendly and witty companion for solving riddles and puzzles. Engage, solve, and have fun!",
+    "an AI assistant for the Department of Computer Application, Vinoba Bhave University, Hazaribagh.",
 };
 
 export default function RootLayout({
